@@ -13,7 +13,6 @@
 
 var changePostItPos = function() {
   $(".post-it").css("background-color","green")
-  console.log('yes')
 }
 
 
@@ -37,11 +36,24 @@ var giveCoords = function () {
   });
 }
 
+function appendDiv(id) {
+  console.log(id)
+  $(document).click(function() {
+    console.log(id)
+    $("#board").append("<div id='" + id + "' class='post-it'>")
+    ////.text("sticky")
+  })
+  return (id + 1)
+}
+
 $(document).ready(changePostItPos())
 
 $(document).ready(giveCoords)
 
-
+$(document).ready(function(){
+  var id = 0;
+  id = appendDiv(id)
+})
 
 // $(function() {
 //   // This code will run when the DOM has finished loading
