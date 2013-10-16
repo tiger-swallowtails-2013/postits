@@ -28,14 +28,6 @@ var showPostIt = function(id) {
 }
 
 
-
-// var postIt = function() {
-//   $('body').click(showPostIt)
-// };
-
-
-
-
 var increment = {
   value: 0,
   count: function() {
@@ -48,19 +40,19 @@ var increment = {
 function createPostIt() {
 
   $(document).click(function(e) {
-    // if e.clientX and e.clientY are inside a div with post-it class
-    //   then go into edit mode
-    // else
-    if ((($(e.target).hasClass("post-it")) === false) && (($(e.target).hasClass("header")) === false) && (($(e.target).hasClass("content")) === false)){
+    if ((($(e.target).hasClass("post-it")) === false) && (($(e.target).hasClass("header")) === false) && (($(e.target).hasClass("content")) === false) && (($(e.target).hasClass("close")) === false)){
       id = increment.value
       $("div").blur()
       $("#board").append("<div id='" + id + "' class='post-it'>")
       $("#"+id).draggable()
-      $("#"+id).html("<div class='header'> X </div>")
+      $("#"+id).html("<div class='header'><span class='close'>[X]</span></div>")
       $("#"+id).append("<div class='content' contenteditable='true'>")
       changePostItPos(id,e.clientX,e.clientY)
       showPostIt(id)
       increment.count()
+    }
+    else if ($(e.target).hasClass("close") === true) {
+      $(e.target).parent().parent().remove()
     }
     else {
       console.log(e.target)
@@ -70,24 +62,8 @@ function createPostIt() {
 }
 
 $(document).ready(function(){
-  // loadOldPostIts()
-  // addCreateNewListeners()
   createPostIt()
 })
-
-// function loadOldPostIts(){
-//   //some json request
-//   var postItJson = //return value of json request >> [{x:234,y:27,text:"akjshfdklwej"},{x:234,y:27,text:"akjshfdklwej"},{x:234,y:27,text:"akjshfdklwej"},{x:234,y:27,text:"akjshfdklwej"},{x:234,y:27,text:"akjshfdklwej"},{x:234,y:27,text:"akjshfdklwej"},{x:234,y:27,text:"akjshfdklwej"}]
-//   $.each(postItJson, function(singlePostIt){
-//     new PostIt(singlePostIt.x, singlePostIt.y, singlePostIt.text, id:singlePostIt.id)
-//   })
-// }
-
-// function addCreateNewListeners(){
-//   $('#board').click(function(event){
-//     new PostIt(event.offsetX, event.offsetY, "")
-//   })
-// }
 
 // $(function() {
 //   // This code will run when the DOM has finished loading
