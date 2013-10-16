@@ -7,8 +7,11 @@
 }
 
 .post-it {
+  display:none;
   position: absolute !important;
+  top: 0px;
   width: 160px;
+  height: 100px;
   background-color: yellow;
   box-shadow: -2px 2px 5px #555;
   overflow: hidden;
