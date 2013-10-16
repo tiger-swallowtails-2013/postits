@@ -51,15 +51,20 @@ function createPostIt() {
     // if e.clientX and e.clientY are inside a div with post-it class
     //   then go into edit mode
     // else
-    if (($(e.target).hasClass("post-it")) === false) {
+    if ((($(e.target).hasClass("post-it")) === false) && (($(e.target).hasClass("header")) === false) && (($(e.target).hasClass("content")) === false)){
       id = increment.value
-      $("#board").append("<div id='" + id + "' class='post-it' contenteditable='true'>")
-      $("#"+id).append("<div class='post-it'>")
+      $("div").blur()
+      $("#board").append("<div id='" + id + "' class='post-it'>")
       $("#"+id).draggable()
-      $("#"+id).html("<div class='header'> X </div>what?!"+id)
+      $("#"+id).html("<div class='header'> X </div>")
+      $("#"+id).append("<div class='content' contenteditable='true'>")
       changePostItPos(id,e.clientX,e.clientY)
       showPostIt(id)
       increment.count()
+    }
+    else {
+      console.log(e.target)
+      $(e.target).focus()
     }
   })
 }
